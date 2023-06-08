@@ -1,6 +1,9 @@
 --Make sure the base does exist
 --By Dusk
 
+term.clear()
+term.setCursorPos(1,1)
+
 local basefs = {
     "/bin/",
     "/boot/",
