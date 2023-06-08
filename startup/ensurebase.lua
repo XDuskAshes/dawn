@@ -1,4 +1,5 @@
 --Make sure the base does exist
+--By Dusk
 
 local basefs = {
     "/bin/",
@@ -27,6 +28,7 @@ local core = {
     "/kernel.lua",
     "/boot/.bootfile",
     "/boot/dboot.lua",
+    "/usr/bin/dash.lua"
     --"/sys/boot.lua"
     --Uncomment the above line (and this) if you make an OS based on this
 }
