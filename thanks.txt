@@ -1,0 +1,3 @@
+This file is for thanking people who have aided development by either pull requests or simply helping regularly
+
+Ocawesome101 (pull request)
