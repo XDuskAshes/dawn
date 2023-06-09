@@ -38,10 +38,9 @@ local core = {
 
 for _,v in pairs(basefs) do
     if fs.exists(v) then
-        print(v,"exists")
+        print(v," exists")
     else
-        printError("/startup/ensurebase.lua:38:",v,"does not exist.")
-        error()
+        error(v.." does not exist.")
     end
 end
 
@@ -49,8 +48,7 @@ for _,v in pairs(core) do
     if fs.exists(v) then
         print(v,"exists")
     else
-        printError("/startup/ensurebase.lua:47:",v,"does not exist.")
-        error()
+        error(v.." does not exist.")
     end
 end
 
