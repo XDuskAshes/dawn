@@ -15,7 +15,6 @@ local basefs = {
     "/run/",
     "/sbin/",
     "/srv/",
-    "/startup/",
     "/tmp/",
     "/var/",
     "/sys/",
