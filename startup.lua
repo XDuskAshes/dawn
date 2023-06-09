@@ -1,1 +1,0 @@
-shell.run("/boot/ensure.lua")
