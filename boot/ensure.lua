@@ -30,14 +30,18 @@ local core = {
     "/kernel.lua",
     "/boot/.bootfile",
     "/boot/dboot.lua",
-    "/usr/bin/dash.lua"
+    "/usr/bin/dash.lua",
+    "/sbin/core/",
+    "/sbin/sys/",
+    "/sbin/core/fhs.lua",
+    "/sbin/sys/criterr.lua"
     --"/sys/boot.lua"
     --Uncomment the above line (and this) if you make an OS based on this
 }
 
 for _,v in pairs(basefs) do
     if fs.exists(v) then
-        print(v," exists")
+        print(v,"exists")
     else
         error(v.." does not exist.")
     end
