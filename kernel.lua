@@ -4,7 +4,7 @@
     1.0.0-idev1
 ]]
 
-require("/sbin/dawn/core/fhs") --throws an error: 'loop or previous error loading module "/sbin/dawn/core/fhs"'
+--require("/sbin/dawn/core/fhs") --throws an error: 'loop or previous error loading module "/sbin/dawn/core/fhs"'
 
 local function _SYSCALL()
     local i = fs.open("/var/.dawninf","r")
@@ -21,7 +21,7 @@ end
 
 --fhs checks
 
-check("root")
+--check("root")
 
 
 --kernelcall()
@@ -29,7 +29,6 @@ check("root")
 function kernelcall(func) --call kernel functions
     local funcs = {
         [ "_SYSCALL" ] = _SYSCALL,
-        [ "checkbase" ] = checkbase
     }
 
     for k,v in pairs(funcs) do

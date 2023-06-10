@@ -4,6 +4,8 @@
     By Dusk
 ]]
 
+require("/kernel")
+
 local wd = "/"
 
 local function cd() --this isn't working as intended, im gonna comment what it should do and ask for help later
