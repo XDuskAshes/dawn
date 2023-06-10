@@ -4,9 +4,10 @@
 ]]
 
 local ver = fs.open("/var/.dawninf", "r")
-local version = ver.readLine(2)
+local z = ver.readLine(1)
+local vers = ver.readLine(2)
 ver.close()
 
 print("runtime",_HOST)
 print("lua",_VERSION)
-print(version)
+print(vers)
