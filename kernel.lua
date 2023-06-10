@@ -4,6 +4,8 @@
     1.0.0-idev1
 ]]
 
+require("/sbin/dawn/core/fhs") --throws an error: 'loop or previous error loading module "/sbin/dawn/core/fhs"'
+
 local function _SYSCALL()
     local i = fs.open("/var/.dawninf","r")
     local inf1 = i.readLine(1)
@@ -17,51 +19,10 @@ local function _SYSCALL()
     print(inf4)
 end
 
-local function checkbase()
-    local basefs = {
-        "/bin/",
-        "/boot/",
-        "/dev/",
-        "/etc/",
-        "/lib/",
-        "/mnt/",
-        "/opt/",
-        "/run/",
-        "/sbin/",
-        "/srv/",
-        "/startup/",
-        "/tmp/",
-        "/var/",
-        "/sys/",
-        "/usr/",
-        "/usr/bin/",
-        "/usr/lib/",
-        "/usr/local/",
-        "/usr/sbin/",
-        "/usr/share/"
-    }
+--fhs checks
 
-    local core = {
-        "/kernel.lua",
-        "/boot/.bootfile",
-        "/boot/dboot.lua",
-        "/usr/bin/dash.lua"
-    }
-    
-    for _,v in pairs(basefs) do
-        if fs.exists(v) ~= true then
-            printError("/kernel.lua:53:",v,"does not exist.")
-            error()
-        end
-    end
-    
-    for _,v in pairs(core) do
-        if fs.exists(v) ~= true then
-            printError("/kernel.lua:60:",v,"does not exist.")
-            error()
-        end
-    end
-end
+check("root")
+
 
 --kernelcall()
 
