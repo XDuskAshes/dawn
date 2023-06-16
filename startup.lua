@@ -1,1 +1,1 @@
-shell.run("/boot/ensure.lua")
+shell.run("/boot/dboot.lua")

@@ -19,22 +19,21 @@ local function _SYSCALL()
     print(inf4)
 end
 
---fhs checks
-
---check("root")
-
-
---kernelcall()
-
-function kernelcall(func) --call kernel functions
-    local funcs = {
-        [ "_SYSCALL" ] = _SYSCALL,
-    }
-
-    for k,v in pairs(funcs) do
-        if func == k then
-            v()
-            break
-        end
+function scrMSG(type,msg) --type: 1,2,3 (see docs); msg: message
+    if type == 1 then
+        write("[ ")
+        term.setTextColor(colors.green)
+        write("OK")
+        term.setTextColor(colors.white)
+        write(" ] "..msg.."\n")
+    elseif type == 2 then
+        write("[ ")
+        term.setTextColor(colors.yellow)
+        write("WARN")
+        term.setTextColor(colors.white)
+        write(" ] "..msg.."\n")
+    elseif type == 3 then
+        printError("[ ERROR ]",msg)
+        error()
     end
 end

@@ -24,8 +24,14 @@ local function ls()
     shell.run("ls",wd)
 end
 
+local function exit()
+    while true do
+        error()
+    end
+end
+
 local z = {
-    [ "ext" ] = error,
+    [ "ext" ] = exit,
     [ "reboot" ] = os.reboot,
     [ "cd" ] = cd,
     [ "ls" ] = ls
