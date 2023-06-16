@@ -133,16 +133,16 @@ end
 scrMSG(1,"bailfile ~= dir")
 
 if fs.exists(bootfile) then
-    print("Boot file exists.")
-    print("boot...")
+    scrMSG(1,"Boot file exists.")
+    scrMSG(1,"boot...")
     shell.run(bootfile)
 elseif fs.exists(bootfile) ~= true then
-    printError("File defined in '/boot/.bootfile' doesn't exist.")
+    scrMSG(2,"File defined in '/boot/.bootfile' doesn't exist.")
     print("Attempt:",bailto)
         if fs.exists(bailto) then
             shell.run(bailto)
         else
-            printError("bootfile",bootfile,"and bail file",bailto,"do not exist.")
+            scrMSG(2,"bootfile "..bootfile.." and bail file "..bailto.." do not exist.")
             while true do
                 write(">>")
                 local a = read()

@@ -43,7 +43,10 @@ local function pass(a)
             v()
             break
         end
+        break
     end
+
+    shell.run("/usr/bin/dash/"..a)
 end
 
 while true do
