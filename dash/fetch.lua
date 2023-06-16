@@ -1,5 +1,6 @@
 --[[
-    dawn fetch
+    dash fetch
+    made for dawn
     by dusk
 ]]
 
