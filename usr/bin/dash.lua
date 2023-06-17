@@ -8,15 +8,29 @@ require("/kernel")
 
 local wd = "/"
 
-local function cd() --this isn't working as intended, im gonna comment what it should do and ask for help later
-    write("cd from "..wd.." to:") --the prompt
-    local i = read() --i should be a string
-    if fs.isDir(i) then --if it is a directory
-        if fs.exists(wd..i) then --'wd..i' should just concatenate the string together (by default it's '/')
-            wd = wd..i --add i to wd
-        elseif fs.exists(wd..i) ~= true then --if it isn't true
-            wd = i --change wd to i exactly
+local function cd()
+    write("cd from "..wd.." to:")
+    local i = read()
+    if fs.exists(i) then
+        if fs.isDir(i) then
+            wd = i
+        elseif fs.isDir(i) ~= true then
+            scrMSG(3,i.." is not a dir")
+        elseif i == nil or "" then
+            scrMSG(3,i.." is not valid.")
         end
+    else
+        scrMSG(3,i.." doesn't exist as dir or file.")
+    end
+
+    if wd == nil then
+        wd = "/"
+        scrMSG(3,"Not a proper dir.")
+    end
+
+    if wd == "" then
+        wd = "/"
+        scrMSG(3,"Not a proper dir.")
     end
 end
 
@@ -24,17 +38,23 @@ local function ls()
     shell.run("ls",wd)
 end
 
-local function exit()
-    while true do
-        error()
+local function pkg()
+    write(" -")
+    local flag = read()
+    if flag == "i" then
+        write(" ")
+        local package = read()
+        
+        
     end
 end
 
 local z = {
-    [ "ext" ] = exit,
+    [ "ext" ] = error,
     [ "reboot" ] = os.reboot,
     [ "cd" ] = cd,
-    [ "ls" ] = ls
+    [ "ls" ] = ls,
+    [ "pkg" ] = pkg
 }
 
 local function pass(a)
@@ -43,10 +63,7 @@ local function pass(a)
             v()
             break
         end
-        break
     end
-
-    shell.run("/usr/bin/dash/"..a)
 end
 
 while true do

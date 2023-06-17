@@ -40,13 +40,13 @@ local core = {
 
 for _,v in pairs(basefs) do
     if fs.exists(v) ~= true then
-        error(v.." does not exist.")
+        scrMSG(4,v.." does not exist.")
     end
 end
 
 for _,v in pairs(core) do
     if fs.exists(v) ~= true then
-        error(v.." does not exist.")
+        scrMSG(4,v.." does not exist.")
     end
 end
 
