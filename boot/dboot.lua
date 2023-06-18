@@ -35,7 +35,6 @@ local core = {
     "/usr/bin/dash.lua",
     "/sbin/core/",
     "/sbin/sys/",
-    "/sbin/core/fhs.lua",
     "/sbin/sys/criterr.lua",
     "/etc/.file",
     "/etc/file",

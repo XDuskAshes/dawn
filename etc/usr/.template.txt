@@ -1,0 +1,3 @@
+password
+sudo (true/false value)
+home folder path

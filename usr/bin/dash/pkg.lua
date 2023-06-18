@@ -9,6 +9,15 @@ local handle = assert(http.get("https://raw.githubusercontent.com/XDuskAshes/daw
 local pkg = textutils.unserialize(handle.readAll())
 handle.close()
 
+local dashcore = {
+    "cls",
+    "disk",
+    "file",
+    "pkg",
+    "help",
+    "label"
+}
+
 local args = {...}
 if #args < 1 then
     print("Usage: pkg (-i, -r)")
@@ -25,13 +34,11 @@ if args[1] == "-i" then
 end
 
 if args[1] == "-r" then
-    if args[2] == "disk" then
-        kernel.scrMSG(3,"Cannot delete "..args[2]..": core dash file")
-    elseif args[2] == "pkg" then
-        kernel.scrMSG(3,"Cannot delete "..args[2]..": core dash file")
-    elseif args[2] == "cls" then
-        kernel.scrMSG(3,"Cannot delete "..args[2]..": core dash file")
-    else
+    for k,v in pairs(dashcore) do
+        if args[2] == v then
+            kernel.scrMSG(4,"Cannot delete "..args[2]..": core dash file")
+        end
+    end
         if fs.exists("/usr/bin/dash/"..args[2]..".lua") then
             fs.delete("/usr/bin/dash/"..args[2]..".lua")
             kernel.scrMSG(1,"Deleted:"..args[2]..".lua")
@@ -40,4 +47,3 @@ if args[1] == "-r" then
             return
         end
     end
-end 

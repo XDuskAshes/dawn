@@ -4,14 +4,41 @@
     By Dusk
 ]]
 
+local user = ""
+
 local kernel = require("/kernel")
 
-local wd
+local label = os.getComputerID() or os.getComputerLabel()
 
-local label = os.getComputerLabel() or os.getComputerID()
+write("User:")
+local seluser = read()
+if fs.exists("/etc/usr/"..seluser..".txt") then
+    local handle = fs.open("/etc/usr/"..seluser..".txt","r")
+    local passwd = handle.readLine(1)
+    local sudo = handle.readLine(2)
+    local home = handle.readLine(3)
+    handle.close()
+    write("Password:")
+    local pass = read() 
+        if passwd == passwd then
+            user = seluser
+        else
+            kernel.scrMSG(3,"Invalid password.")
+            sleep(1)
+            os.reboot()
+        end
+else
+    kernel.scrMSG(3,"Invalid user.")
+    sleep(1)
+    os.reboot()
+end
 
 while true do
-    write("dash@("..label..")-$")
+    write(user.."@dash".."-$")
     local input = read()
-    shell.run("/usr/bin/dash/"..input)
+    if input == "ext" then
+        os.reboot()
+    else
+        shell.run("/usr/bin/dash/"..input)
+    end
 end
