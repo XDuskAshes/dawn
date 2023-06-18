@@ -4,9 +4,9 @@
     1.0.0-idev1
 ]]
 
---require("/sbin/dawn/core/fhs") --throws an error: 'loop or previous error loading module "/sbin/dawn/core/fhs"'
+local kernel = {}
 
-function _SYSCALL()
+function kernel.SYSCALL()
     local i = fs.open("/stat/.dawninf","r")
     local inf1 = i.readLine(1)
     local inf2 = i.readLine(2)
@@ -19,7 +19,7 @@ function _SYSCALL()
     print(inf4)
 end
 
-function scrMSG(type,msg) --type: 1,2,3,4 (see docs); msg: message
+function kernel.scrMSG(type,msg) --type: 1,2,3,4 (see docs); msg: message
     if type == 1 then
         write("[ ")
         term.setTextColor(colors.green)
@@ -39,3 +39,5 @@ function scrMSG(type,msg) --type: 1,2,3,4 (see docs); msg: message
         error()
     end
 end
+
+return kernel

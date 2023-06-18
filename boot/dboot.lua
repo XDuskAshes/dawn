@@ -1,7 +1,7 @@
 --dawn default boot program
 --by dusk
 
-require("/kernel")
+local kernel = require "/kernel"
 
 term.clear()
 term.setCursorPos(1,1)
@@ -11,6 +11,9 @@ local basefs = {
     "/boot/",
     "/dev/",
     "/etc/",
+    "/etc/usr/",
+    "/etc/dash/",
+    "/etc/dash/help/",
     "/lib/",
     "/mnt/",
     "/sbin/",
@@ -33,53 +36,55 @@ local core = {
     "/sbin/core/",
     "/sbin/sys/",
     "/sbin/core/fhs.lua",
-    "/sbin/sys/criterr.lua"
+    "/sbin/sys/criterr.lua",
+    "/etc/.file",
+    "/etc/file",
     --"/sys/boot.lua"
     --Uncomment the above line (and this) if you make an OS based on this
 }
 
 for _,v in pairs(basefs) do
     if fs.exists(v) ~= true then
-        scrMSG(4,v.." does not exist.")
+        kernel.scrMSG(4,v.." does not exist.")
     end
 end
 
 for _,v in pairs(core) do
     if fs.exists(v) ~= true then
-        scrMSG(4,v.." does not exist.")
+        kernel.scrMSG(4,v.." does not exist.")
     end
 end
 
-scrMSG(1,"basefs and core are present")
+kernel.scrMSG(1,"basefs and core are present")
 
 local function setboot()
     write("Boot file path:")
     local bootfileNew = read()
     fs.delete("/boot/.bootfile")
-    scrMSG(1,"deleted .bootfile")
+    kernel.scrMSG(1,"deleted .bootfile")
     fs.copy("/etc/.file", "/tmp/.bootfile")
-    scrMSG(1,"copied /etc/.file to /tmp/ as .bootfile")
+    kernel.scrMSG(1,"copied /etc/.file to /tmp/ as .bootfile")
     local tmpb = fs.open("/tmp/.bootfile","w")
     tmpb.write(bootfileNew)
     tmpb.close()
-    scrMSG(1,"opened and written "..bootfileNew.." to /tmp/.bootfile")
+    kernel.scrMSG(1,"opened and written "..bootfileNew.." to /tmp/.bootfile")
     fs.move("/tmp/.bootfile", "/boot/.bootfile")
-    scrMSG(1,"file moved successfully.")
+    kernel.scrMSG(1,"file moved successfully.")
 end
 
 local function setbail()
     write("bail file path:")
     local bailfileNew = read()
     fs.delete("/boot/.bailto")
-    scrMSG(1,"deleted .bailto")
+    kernel.scrMSG(1,"deleted .bailto")
     fs.copy("/etc/.file", "/tmp/.bailto")
-    scrMSG(1,"copied /etc/.file to /tmp/ as .bailto")
+    kernel.scrMSG(1,"copied /etc/.file to /tmp/ as .bailto")
     local tmpb = fs.open("/tmp/.bailto","w")
     tmpb.write(bailfileNew)
     tmpb.close()
-    scrMSG(1,"opened and written "..bailfileNew.." to /tmp/.bailto")
+    kernel.scrMSG(1,"opened and written "..bailfileNew.." to /tmp/.bailto")
     fs.move("/tmp/.bailto", "/boot/.bailto")
-    scrMSG(1,"file moved successfully.")
+    kernel.scrMSG(1,"file moved successfully.")
 end
 
 local limitshell = {
@@ -111,7 +116,7 @@ local bailto = c.readLine(1)
 c.close()
 
 if fs.isDir(bootfile) then
-    scrMSG(2,"bootfile is dir")
+    kernel.scrMSG(2,"bootfile is dir")
     while true do
         write(">>")
         local a = read()
@@ -119,10 +124,10 @@ if fs.isDir(bootfile) then
     end
 end
 
-scrMSG(1,"bootfile ~= dir")
+kernel.scrMSG(1,"bootfile ~= dir")
 
 if fs.isDir(bailto) then
-    scrMSG(2,"bailfile is dir")
+    kernel.scrMSG(2,"bailfile is dir")
     while true do
         write(">>")
         local a = read()
@@ -130,19 +135,19 @@ if fs.isDir(bailto) then
     end
 end
 
-scrMSG(1,"bailfile ~= dir")
+kernel.scrMSG(1,"bailfile ~= dir")
 
 if fs.exists(bootfile) then
-    scrMSG(1,"Boot file exists.")
-    scrMSG(1,"boot...")
+    kernel.scrMSG(1,"Boot file exists.")
+    kernel.scrMSG(1,"boot...")
     shell.run(bootfile)
 elseif fs.exists(bootfile) ~= true then
-    scrMSG(2,"File defined in '/boot/.bootfile' doesn't exist.")
+    kernel.scrMSG(2,"File defined in '/boot/.bootfile' doesn't exist.")
     print("Attempt:",bailto)
         if fs.exists(bailto) then
             shell.run(bailto)
         else
-            scrMSG(2,"bootfile "..bootfile.." and bail file "..bailto.." do not exist.")
+            kernel.scrMSG(2,"bootfile "..bootfile.." and bail file "..bailto.." do not exist.")
             while true do
                 write(">>")
                 local a = read()
