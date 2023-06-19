@@ -10,28 +10,13 @@ local kernel = require("/kernel")
 
 local label = os.getComputerID() or os.getComputerLabel()
 
-write("User:")
-local seluser = read()
-if fs.exists("/etc/usr/"..seluser..".txt") then
-    local handle = fs.open("/etc/usr/"..seluser..".txt","r")
-    local passwd = handle.readLine(1)
-    local sudo = handle.readLine(2)
-    local home = handle.readLine(3)
-    handle.close()
-    write("Password:")
-    local pass = read() 
-        if passwd == passwd then
-            user = seluser
-        else
-            kernel.scrMSG(3,"Invalid password.")
-            sleep(1)
-            os.reboot()
-        end
-else
-    kernel.scrMSG(3,"Invalid user.")
-    sleep(1)
-    os.reboot()
+if fs.exists("/etc/usr/.login") ~= true then
+    shell.run("/usr/bin/dash-login.lua")
 end
+
+local handle = fs.open("/etc/usr/.login","r")
+user = handle.readLine(1)
+handle.close()
 
 while true do
     write(user.."@dash".."-$")

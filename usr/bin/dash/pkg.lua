@@ -24,7 +24,6 @@ if #args < 1 then
     return
 end
 
-
 if args[1] == "-i" then
     for k,v in pairs(pkg) do
         if args[2] == k then
@@ -47,3 +46,17 @@ if args[1] == "-r" then
             return
         end
     end
+
+if args[1] == "-l" then
+    for k,v in pairs(pkg) do
+        if fs.exists("/usr/bin/dash/"..k..".lua") then
+            write(k.." (")
+            term.setTextColor(colors.green)
+            write("INSTALLED")
+            term.setTextColor(colors.white)
+            write(")\n")
+        else
+            print(k)
+        end
+    end
+end
