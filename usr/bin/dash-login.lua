@@ -20,9 +20,9 @@ write("Password:")
 local key = read()
 if fs.exists("/etc/usr/"..seluser..".txt") then
     local handle = fs.open("/etc/usr/"..seluser..".txt","r")
-    local passwd = handle.readLine(1)
-    local sudo = handle.readLine(2)
-    local home = handle.readLine(3)
+    local passwd = handle.readLine()
+    local sudo = handle.readLine()
+    local home = handle.readLine()
     handle.close()
         if key == passwd then
             local handle = fs.open("/etc/usr/.login","w")

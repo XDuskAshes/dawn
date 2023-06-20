@@ -21,7 +21,7 @@ handle.close()
 while true do
     write(user.."@dash".."-$")
     local input = read()
-    if input == "ext" then
+    if input == "logout" then
         os.reboot()
     else
         shell.run("/usr/bin/dash/"..input)
