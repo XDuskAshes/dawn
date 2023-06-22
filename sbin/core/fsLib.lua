@@ -3,7 +3,7 @@
     by Dusk
 ]]
 
-local fhs = {}
+local fsLib = {}
 
 local basefs = {
     "/bin/",
@@ -31,8 +31,8 @@ local basefs = {
     "/usr/share/"
 }
 
-function fhs.check()
+function fsLib.check()
     
 end
 
-return fhs
+return fsLib

@@ -11,6 +11,7 @@ if args[1] == "-a" then --add user
     local newPass = ""
     local newSudo = ""
     local newHome = ""
+    local newShell = ""
 
     --check for sudo
 
@@ -65,6 +66,13 @@ if args[1] == "-a" then --add user
     if fs.exists("/etc/usr/"..args[5]..".txt") then
         kernel.scrMSG(4,"user exists")
     else
+
+
+    if args[7] == nil then
+        kernel.scrMSG(4,"No shell selected")
+    else
+        newShell = args[7]
+    end
     
     --make the user file
     fs.copy("/etc/file","/etc/usr/"..args[5]..".txt")
@@ -81,6 +89,8 @@ if args[1] == "-a" then --add user
     kernel.scrMSG(1,"sudo value ("..newSudo..") written")
     handle.writeLine(newHome)
     kernel.scrMSG(1,"home value ("..newHome..") written")
+    handle.writeLine(newShell)
+    kernel.scrMSG(1,"shell value ("..newShell..") written")
     handle.close()
     end
 else
@@ -144,5 +154,5 @@ elseif args[1] == "-l" then --list users
         print(v)
     end
 elseif args[1] == nil then
-    kernel.scrMSG(4,"Invalid or no flag (-a, -r, -l) selected")
+    kernel.scrMSG(4,"Usage: usr (-a/-r/-l)")
 end

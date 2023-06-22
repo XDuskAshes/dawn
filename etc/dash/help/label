@@ -1,1 +1,5 @@
-usage: label -s(et) <label> or label -c(lear)
+label - label stuff
+Usages:
+label -s <label> | sets the label
+label -c | clears the label
+label -d | display the label

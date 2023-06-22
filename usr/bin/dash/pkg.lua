@@ -15,7 +15,8 @@ local dashcore = {
     "file",
     "pkg",
     "help",
-    "label"
+    "label",
+    "usr"
 }
 
 local args = {...}

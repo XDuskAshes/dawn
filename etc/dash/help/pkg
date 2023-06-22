@@ -1,3 +1,6 @@
 pkg - package manager
--i <pkg> = install package
--r <pkg> = remove package
+Usages:
+pkg -i <pkg> | install package
+pkg -r <pkg> | uninstall package
+pkg -l | list all packages
+(planned) pkg -h <pkg> | display help for INSTALLED packages

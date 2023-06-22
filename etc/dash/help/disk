@@ -1,3 +1,4 @@
 disk - create disks with periphemu
--c <side> - create one on <side>
--r <side> - delete one on <side>
+Usages:
+disk -c <side> | create disk on selected side
+disk -r <side> | remove disk on selected side
