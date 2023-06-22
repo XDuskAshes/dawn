@@ -40,7 +40,7 @@ end
 if args[1] == "-r" then
     for k,v in pairs(dashcore) do
         if args[2] == v then
-            kernel.scrMSG(4,"Cannot delete "..args[2]..": core dash file")
+            kernel.scrMSG(5,"Cannot delete "..args[2]..": core dash file")
         end
     end
 
@@ -60,7 +60,7 @@ if args[1] == "-r" then
 
 if args[1] == "-l" then
     for k,v in pairs(pkg) do
-        if fs.exists("/usr/bin/dash/"..k..".lua") then
+        if fs.exists("/bin/"..k..".lua") then
             write(k.." (")
             term.setTextColor(colors.green)
             write("INSTALLED")
