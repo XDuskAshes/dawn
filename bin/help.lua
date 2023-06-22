@@ -18,7 +18,7 @@ if args[1] == "-i" then
         print(v)
     end
 elseif args[1] == "-l" then
-    local i = fs.list("/usr/bin/dash/")
+    local i = fs.list("/bin/")
         for k,v in pairs(i) do
             print(v)
         end

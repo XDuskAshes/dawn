@@ -24,6 +24,7 @@ local user
 local pass
 local id
 local home
+
 repeat
     local a = handle.readLine()
     user, pass, id, home, cshell = string.match(a, "([^:]+):([^:]+):([^:]+):([^:]+):([^:]+)")

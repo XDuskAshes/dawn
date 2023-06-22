@@ -19,6 +19,10 @@ local dashcore = {
     "usr"
 }
 
+local coreSys = {
+    "login"
+}
+
 local args = {...}
 if #args < 1 then
     print("Usage: pkg (-i, -r)")
@@ -28,7 +32,7 @@ end
 if args[1] == "-i" then
     for k,v in pairs(pkg) do
         if args[2] == k then
-            shell.run("wget",v,"/usr/bin/dash/"..k..".lua")
+            shell.run("wget",v,"/bin/"..k..".lua")
         end
     end
 end
@@ -39,8 +43,14 @@ if args[1] == "-r" then
             kernel.scrMSG(4,"Cannot delete "..args[2]..": core dash file")
         end
     end
-        if fs.exists("/usr/bin/dash/"..args[2]..".lua") then
-            fs.delete("/usr/bin/dash/"..args[2]..".lua")
+
+    for k,v in pairs(coreSys) do
+        if args[2] == v then
+            kernel.scrMSG(5,"Cannot delete "..args[2]..": core sys file")
+        end
+    end
+        if fs.exists("/bin/"..args[2]..".lua") then
+            fs.delete("/bin/"..args[2]..".lua")
             kernel.scrMSG(1,"Deleted:"..args[2]..".lua")
         else
             kernel.scrMSG(3,"File "..args[2]..".lua doesn't exist.")
