@@ -15,7 +15,7 @@ if fs.exists("/etc/usr/.login") ~= true then
 end
 
 local handle = fs.open("/etc/usr/.login","r")
-user = handle.readLine(1)
+user = handle.readLine()
 handle.close()
 
 while true do

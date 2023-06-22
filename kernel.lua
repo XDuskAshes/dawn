@@ -6,20 +6,11 @@
 
 local kernel = {}
 
-function kernel.SYSCALL()
-    local i = fs.open("/stat/.dawninf","r")
-    local inf1 = i.readLine(1)
-    local inf2 = i.readLine(2)
-    local inf3 = i.readLine(3)
-    local inf4 = i.readLine(4)
-    i.close()
-    print(inf1)
-    print(inf2)
-    print(inf3)
-    print(inf4)
+function kernel.SYSCALL(a)
+
 end
 
-function kernel.scrMSG(type,msg) --type: 1,2,3,4 (see docs); msg: message
+function kernel.scrMSG(type,msg) --type: 1,2,3,4,5 (see docs); msg: message
     if type == 1 then
         write("[ ")
         term.setTextColor(colors.green)
@@ -33,8 +24,14 @@ function kernel.scrMSG(type,msg) --type: 1,2,3,4 (see docs); msg: message
         term.setTextColor(colors.white)
         write(" ] "..msg.."\n")
     elseif type == 3 then
-        printError("[ ERROR ]",msg)
+        write("[ ")
+        term.setTextColor(colors.brown)
+        write("INFO")
+        term.setTextColor(colors.white)
+        write(" ] "..msg.."\n")
     elseif type == 4 then
+        printError("[ ERROR ]",msg)
+    elseif type == 5 then
         printError("[ ERROR ]",msg)
         error()
     end

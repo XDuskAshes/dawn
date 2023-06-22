@@ -141,7 +141,7 @@ if fs.exists(bootfile) then
     kernel.scrMSG(1,"boot...")
     shell.run(bootfile)
 elseif fs.exists(bootfile) ~= true then
-    kernel.scrMSG(2,"File defined in '/boot/.bootfile' doesn't exist.")
+    kernel.scrMSG(3,"File defined in '/boot/.bootfile' doesn't exist.")
     print("Attempt:",bailto)
         if fs.exists(bailto) then
             shell.run(bailto)
