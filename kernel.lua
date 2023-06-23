@@ -37,4 +37,8 @@ function kernel.scrMSG(type,msg) --type: 1,2,3,4,5 (see docs); msg: message
     end
 end
 
+function kernel.sudoCheck(user) --Check the sudo status of a user
+    
+end
+
 return kernel

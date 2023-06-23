@@ -28,6 +28,8 @@ local basefs = {
     "/usr/share/"
 }
 
+kernel.scrMSG(1,"init basefs table")
+
 local core = {
     "/kernel.lua",
     "/boot/.bootfile",
@@ -42,11 +44,15 @@ local core = {
     --Uncomment the above line (and this) if you make an OS based on this
 }
 
+kernel.scrMSG(1,"init core table")
+
 for _,v in pairs(basefs) do
     if fs.exists(v) ~= true then
         kernel.scrMSG(4,v.." does not exist.")
     end
 end
+
+kernel.scrMSG(1,"complete basefs check")
 
 for _,v in pairs(core) do
     if fs.exists(v) ~= true then
@@ -54,57 +60,7 @@ for _,v in pairs(core) do
     end
 end
 
-kernel.scrMSG(1,"basefs and core are present")
-
-local function setboot()
-    write("Boot file path:")
-    local bootfileNew = read()
-    fs.delete("/boot/.bootfile")
-    kernel.scrMSG(1,"deleted .bootfile")
-    fs.copy("/etc/.file", "/tmp/.bootfile")
-    kernel.scrMSG(1,"copied /etc/.file to /tmp/ as .bootfile")
-    local tmpb = fs.open("/tmp/.bootfile","w")
-    tmpb.write(bootfileNew)
-    tmpb.close()
-    kernel.scrMSG(1,"opened and written "..bootfileNew.." to /tmp/.bootfile")
-    fs.move("/tmp/.bootfile", "/boot/.bootfile")
-    kernel.scrMSG(1,"file moved successfully.")
-end
-
-local function setbail()
-    write("bail file path:")
-    local bailfileNew = read()
-    fs.delete("/boot/.bailto")
-    kernel.scrMSG(1,"deleted .bailto")
-    fs.copy("/etc/.file", "/tmp/.bailto")
-    kernel.scrMSG(1,"copied /etc/.file to /tmp/ as .bailto")
-    local tmpb = fs.open("/tmp/.bailto","w")
-    tmpb.write(bailfileNew)
-    tmpb.close()
-    kernel.scrMSG(1,"opened and written "..bailfileNew.." to /tmp/.bailto")
-    fs.move("/tmp/.bailto", "/boot/.bailto")
-    kernel.scrMSG(1,"file moved successfully.")
-end
-
-local limitshell = {
-    [ "setboot" ] = setboot,
-    [ "setbail" ] = setbail,
-    [ "reboot" ] = os.reboot
-}
-
-local function run(a)
-    if a == "help" then
-        for k,v in pairs(limitshell) do
-            print(k)
-        end
-    end
-    for k,v in pairs(limitshell) do
-        if a == k then
-            v()
-            break
-        end
-    end
-end
+kernel.scrMSG(1,"complete core check")
 
 local b = fs.open("/boot/.bootfile","r")
 local bootfile = b.readLine(1)
@@ -116,22 +72,16 @@ c.close()
 
 if fs.isDir(bootfile) then
     kernel.scrMSG(2,"bootfile is dir")
-    while true do
-        write(">>")
-        local a = read()
-        run(a)
-    end
+    shell.run("/boot/dbios/init.lua")
+    error()
 end
 
 kernel.scrMSG(1,"bootfile ~= dir")
 
 if fs.isDir(bailto) then
     kernel.scrMSG(2,"bailfile is dir")
-    while true do
-        write(">>")
-        local a = read()
-        run(a)
-    end
+    shell.run("/boot/dbios/init.lua")
+    error()
 end
 
 kernel.scrMSG(1,"bailfile ~= dir")
@@ -146,11 +96,7 @@ elseif fs.exists(bootfile) ~= true then
         if fs.exists(bailto) then
             shell.run(bailto)
         else
-            kernel.scrMSG(2,"bootfile "..bootfile.." and bail file "..bailto.." do not exist.")
-            while true do
-                write(">>")
-                local a = read()
-                run(a)
-            end
+            kernel.scrMSG(4,"bootfile "..bootfile.." and bail file "..bailto.." do not exist.")
+            shell.run("/boot/dbios/init.lua")
         end
 end
