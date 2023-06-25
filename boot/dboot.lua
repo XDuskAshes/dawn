@@ -3,6 +3,8 @@
 
 local kernel = require "/kernel"
 
+kernel.initLog("boot")
+
 term.clear()
 term.setCursorPos(1,1)
 
@@ -14,6 +16,7 @@ local basefs = {
     "/etc/usr/",
     "/etc/dash/",
     "/etc/dash/help/",
+    "/etc/logs/",
     "/lib/",
     "/mnt/",
     "/sbin/",
@@ -28,6 +31,8 @@ local basefs = {
     "/usr/share/"
 }
 
+
+kernel.log("init basefs table",1)
 kernel.scrMSG(1,"init basefs table")
 
 local core = {
@@ -41,6 +46,7 @@ local core = {
     --Uncomment the above line if you make an OS based on this
 }
 
+kernel.log("init core table",1)
 kernel.scrMSG(1,"init core table")
 
 for _,v in pairs(basefs) do
@@ -49,6 +55,7 @@ for _,v in pairs(basefs) do
     end
 end
 
+kernel.log("complete basefs check",1)
 kernel.scrMSG(1,"complete basefs check")
 
 for _,v in pairs(core) do
@@ -57,6 +64,7 @@ for _,v in pairs(core) do
     end
 end
 
+kernel.log("complete core check",1)
 kernel.scrMSG(1,"complete core check")
 
 local b = fs.open("/boot/.bootfile","r")
@@ -87,13 +95,16 @@ if fs.exists(bootfile) then
     kernel.scrMSG(1,"Boot file exists.")
     kernel.scrMSG(1,"boot...")
     shell.run(bootfile)
+    kernel.logClose()
 elseif fs.exists(bootfile) ~= true then
     kernel.scrMSG(3,"File defined in '/boot/.bootfile' doesn't exist.")
     print("Attempt:",bailto)
         if fs.exists(bailto) then
             shell.run(bailto)
+            kernel.logClose()
         else
             kernel.scrMSG(4,"bootfile "..bootfile.." and bail file "..bailto.." do not exist.")
             shell.run("/boot/dbios/init.lua")
+            kernel.logClose()
         end
 end

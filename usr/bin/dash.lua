@@ -27,6 +27,9 @@ while true do
     local input = read()
     if isempty(input) then
         write("")
+    elseif input == "reboot" then
+        shell.run("/sbin/r.lua")
+        error()
     else
         shell.run("/bin/"..input)
     end

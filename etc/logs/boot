@@ -1,0 +1,9 @@
+(dboot.lua):[ok]init basefs table
+
+(dboot.lua):[ok]init core table
+
+(dboot.lua):[ok]complete basefs check
+
+(dboot.lua):[ok]complete core check
+
+(k.logClose()):[close]close log
