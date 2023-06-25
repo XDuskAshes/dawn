@@ -44,7 +44,12 @@ local home
 repeat
     local a = handle.readLine()
     user, pass, id, home, cshell = string.match(a, "([^:]+):([^:]+):([^:]+):([^:]+):([^:]+)")
-    if user or pass or id or home or cshell == nil then
+    if user == nil then
+        kernel.scrMSG(4,"No user found.")
+        sleep(1)
+        os.reboot()
+    end
+    if pass == nil then
         kernel.scrMSG(4,"No user found.")
         sleep(1)
         os.reboot()

@@ -35,13 +35,10 @@ local core = {
     "/boot/.bootfile",
     "/boot/dboot.lua",
     "/usr/bin/dash.lua",
-    "/sbin/core/",
-    "/sbin/sys/",
-    "/sbin/sys/criterr.lua",
     "/etc/.file",
     "/etc/file",
     --"/sys/boot.lua"
-    --Uncomment the above line (and this) if you make an OS based on this
+    --Uncomment the above line if you make an OS based on this
 }
 
 kernel.scrMSG(1,"init core table")

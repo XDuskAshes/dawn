@@ -12,7 +12,7 @@ end
 local args = {...}
 
 if args[1] == "-a" then
-    
+    local toWrite = ""
 elseif args[1] == "-r" then
 
 elseif args[1] == "-l" then
