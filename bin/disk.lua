@@ -1,39 +1,55 @@
 --[[
-    For creation and management of disks (using periphemu)
+    For management of disks
     By Dusk
-
-    Definitions:
-    Sector = dir in disk root (/disk/)
 ]]
 
-local kernel = require("/kernel")
+local k = require "/kernel"
 
 local args = {...}
-if #args < 1 then
-    print("Usage: disk (-c, -r)")
-    return
-end
 
-if args[1] == "-c" then
-    if #args < 2 then
-        printError("Need side")
-        return
-    else
-        periphemu.create(args[2],"drive",1)
-        kernel.scrMSG(1,"Created drive on "..args[2])
-    end
-end
-if args[1] == "-r" then
-    if #args < 2 then
-        printError("Need side")
-        return
-    else
-        if peripheral.isPresent(args[2]) == true then
-            periphemu.remove(args[2])
-            kernel.scrMSG(1,"removed drive on "..args[2])
-        else
-            kernel.scrMSG(3,"peripheral simply doesn't exist.")
-            return
+local per = peripheral.getNames()
+
+if k.empty(args[1]) then
+    print("Usage: disk (-l(-v)/-w <disk>/-e <disk>/-p <disk>)")
+elseif args[1] == "-l" then
+    local drive = peripheral.find("drive") or error("no drives")
+    print("| SIDE | MOUNT |")
+    for i,v in ipairs(per) do
+        local t = peripheral.getType(v)
+        if t == "drive" then
+            if k.empty(args[2]) then
+                local present = disk.isPresent(v)
+                    if present then
+                        local mnt = disk.getMountPath(v)
+                        write("["..v.."]|"..mnt.."|\n")
+                    else
+                        write("["..v.."]|nil|\n")
+                    end
+                elseif args[2] == "-v" then
+                local present = disk.isPresent(v)
+                    if present then
+                        local mnt = disk.getMountPath(v)
+                        local cap = fs.getCapacity(mnt)
+                        local free = fs.getFreeSpace(mnt)
+                        write("+["..v.."]|"..mnt.."|\n")
+                        write("|Capacity: "..cap.."|Space Free: "..free.."|\n")
+                    else
+                        write("["..v.."]|nil|\n")
+                    end
+            end
         end
     end
+elseif args[1] == "-e" then
+    if k.empty(args[2]) then
+        print("Usage: disk -e <side>")
+    else
+        for _,v in ipairs(per) do
+            local present = disk.isPresent(v)
+            if present then
+                disk.eject(args[2])
+            end
+        end
+    end
+else
+    print("Supplied argument '"..args[1].."' is not applicable.")
 end

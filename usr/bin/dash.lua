@@ -29,7 +29,6 @@ while true do
         write("")
     elseif input == "reboot" then
         shell.run("/sbin/r.lua")
-        error()
     else
         shell.run("/bin/"..input)
     end

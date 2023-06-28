@@ -43,6 +43,9 @@ local home
 
 repeat
     local a = handle.readLine()
+    if a == nil then
+        os.reboot()
+    end
     user, pass, id, home, cshell = string.match(a, "([^:]+):([^:]+):([^:]+):([^:]+):([^:]+)")
     if user == nil then
         kernel.scrMSG(4,"No user found.")

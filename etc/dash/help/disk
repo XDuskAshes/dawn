@@ -1,4 +1,4 @@
-disk - create disks with periphemu
-Usages:
-disk -c <side> | create disk on selected side
-disk -r <side> | remove disk on selected side
+disk - disk management
+Usage(s):
+-l - list disks. Can be followed with -v for extended info.
+-e <disk> - eject a disk (if applicable).
