@@ -5,8 +5,8 @@
 ]]
 
 local ver = fs.open("/stat/.dawninf", "r")
-local z = ver.readLine(1)
-local vers = ver.readLine(2)
+local z = ver.readLine()
+local vers = ver.readLine()
 ver.close()
 
 print("runtime",_HOST)
