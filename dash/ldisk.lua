@@ -44,21 +44,12 @@ else
             spFre = fs.getFreeSpace(mnt)
             spUse = spCap - spFre
         end
-    local handle = fs.open("/etc/logs/"..sFile,"w")
     print("--------------------")
-    handle.writeLine("Info of "..args[1]..":")
     print("Info of",args[1]..":")
-    handle.writeLine("Mounted as: "..mnt)
     print("Mounted as:",mnt)
-    handle.writeLine("Label/ID: "..label)
     print("Label/ID:",label)
-    handle.writeLine("Has audio?: "..med)
     print("Has audio?:",med)
-    handle.writeLine("Total space: "..spCap)
     print("Total space:",spCap)
-    handle.writeLine("Space left: "..spFre)
     print("Space left:",spFre)
-    handle.writeLine("Space used: "..spUse)
     print("Space used:",spUse)
-    handle.close()
 end
