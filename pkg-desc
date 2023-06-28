@@ -1,0 +1,4 @@
+{
+    [ "fetch" ] = "screenfetch, but it's less clunky",
+    [ "ldisk" ] = "per disk -l -v, but one disk at a time. Also saves to a file."
+}
