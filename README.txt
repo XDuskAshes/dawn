@@ -31,3 +31,13 @@ For contributing, I have just a few rules.
 1. When making a pull/merge request, make sure to state what the code does and (if applicable) how to trigger the code.
 2. Watch your language (obviously).
 3. Always make sure to also test on a local copy to double check before trying to commit.
+
++==========================================================+
+
+License: GNU GPL 3.0
+Open-source created by Dusk and Dusk Labs Software Co. [1]
+
++==========================================================+
+
+[1] Legal disclaimer: Dusk Labs Software Co. Is not a real company name and is made up. Any accidental breaches of copyright
+will be corrected accordingly.

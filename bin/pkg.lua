@@ -1,27 +1,10 @@
 --[[
     PKG - Package Manager
-    Downloads list from https://raw.githubusercontent.com/XDuskAshes/dawn/pkgs/pkg-list.txt
+    Downloads list from https://raw.githubusercontent.com/XDuskAshes/dawn/pkgs/pkg-list
+    Downloads ignore from https://raw.githubusercontent.com/XDuskAshes/dawn/pkgs/pkg-ignore
 ]]
 
 local kernel = require("/kernel")
-
-local handle = assert(http.get("https://raw.githubusercontent.com/XDuskAshes/dawn/pkgs/pkg-list.txt"))
-local pkg = textutils.unserialize(handle.readAll())
-handle.close()
-
-local dashcore = {
-    "cls",
-    "disk",
-    "file",
-    "pkg",
-    "help",
-    "label",
-    "usr"
-}
-
-local coreSys = {
-    "login"
-}
 
 local args = {...}
 if #args < 1 then
@@ -30,6 +13,10 @@ if #args < 1 then
 end
 
 if args[1] == "-i" then
+    local handle = assert(http.get("https://raw.githubusercontent.com/XDuskAshes/dawn/pkgs/pkg-list"))
+    local pkg = textutils.unserialize(handle.readAll())
+    handle.close()
+
     for k,v in pairs(pkg) do
         if args[2] == k then
             shell.run("wget",v,"/bin/"..k..".lua")
@@ -38,15 +25,16 @@ if args[1] == "-i" then
 end
 
 if args[1] == "-r" then
-    for k,v in pairs(dashcore) do
-        if args[2] == v then
-            kernel.scrMSG(5,"Cannot delete "..args[2]..": core dash file")
-        end
-    end
+    local handle = assert(http.get("https://raw.githubusercontent.com/XDuskAshes/dawn/pkgs/pkg-ignore"))
+    local ignore = textutils.unserialize(handle.readAll())
+    handle.close()
 
-    for k,v in pairs(coreSys) do
+    for k,v in pairs(ignore) do
         if args[2] == v then
-            kernel.scrMSG(5,"Cannot delete "..args[2]..": core sys file")
+            kernel.scrMSG(5,"Cannot delete "..args[2]..": defined in ignore")
+        elseif args[2] == "pkg" then
+            print("(insert J. Jonah Jameson laughing hysterically)")
+            error()
         end
     end
         if fs.exists("/bin/"..args[2]..".lua") then
@@ -59,6 +47,9 @@ if args[1] == "-r" then
     end
 
 if args[1] == "-l" then
+    local handle = assert(http.get("https://raw.githubusercontent.com/XDuskAshes/dawn/pkgs/pkg-list"))
+    local pkg = textutils.unserialize(handle.readAll())
+    handle.close()
     for k,v in pairs(pkg) do
         if fs.exists("/bin/"..k..".lua") then
             write(k.." (")

@@ -1,4 +1,0 @@
-disk - disk management
-Usage(s):
--l - list disks. Can be followed with -v for extended info.
--e <disk> - eject a disk (if applicable).
