@@ -6,7 +6,6 @@
 
 local args = {...}
 
-local sFile = "ldisk-log"
 local mnt
 local label
 local med
@@ -14,15 +13,6 @@ local spCap
 local spFre
 local spUse
 local per = peripheral.getNames()
-
-if fs.exists("/etc/logs/"..sFile) then
-    local n = 0
-    repeat
-        local nn = n + 1
-        sFile = "ldisk-log-"..nn
-    until fs.exists("/etc/logs/"..sFile) ~= true
-        fs.copy("/etc/file","/etc/logs/"..sFile)
-end
 
 if args[1] == nil or args[1] == "" then
     print("Usage: ldisk <drive>")
