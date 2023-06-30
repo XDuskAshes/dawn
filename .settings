@@ -1,0 +1,3 @@
+{
+  [ "shell.allow_disk_startup" ] = false,
+}

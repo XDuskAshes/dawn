@@ -18,7 +18,9 @@ if args[1] == "-i" then
     handle.close()
 
     for k,v in pairs(pkg) do
-        if args[2] == k then
+        if args[2] == "all" then
+            shell.run("wget",v,"/bin/"..k..".lua")
+        elseif args[2] == k then
             shell.run("wget",v,"/bin/"..k..".lua")
         end
     end
@@ -28,23 +30,36 @@ if args[1] == "-r" then
     local handle = assert(http.get("https://raw.githubusercontent.com/XDuskAshes/dawn/pkgs/pkg-ignore"))
     local ignore = textutils.unserialize(handle.readAll())
     handle.close()
+    
+    if args[2] == "all" then
+        local handle2 = assert(http.get("https://raw.githubusercontent.com/XDuskAshes/dawn/pkgs/pkg-list"))
+        local pkg = textutils.unserialize(handle2.readAll())
+        handle2.close()
+        for k,v in pairs(pkg) do
+            if fs.exists("/bin/"..k..".lua") then
+                fs.delete("/bin/"..k..".lua")
+            end
+        end
+    else
+        for k,v in pairs(ignore) do
+            if args[2] == v then
+                kernel.scrMSG(5,"Cannot delete "..args[2]..": defined in ignore")
+            elseif args[2] == "pkg" then
+                print("(insert J. Jonah Jameson laughing hysterically)")
+                error()
+            end
+        end
+            if fs.exists("/bin/"..args[2]..".lua") then
+                fs.delete("/bin/"..args[2]..".lua")
+                kernel.scrMSG(1,"Deleted:"..args[2]..".lua")
+            else
+                kernel.scrMSG(3,"File "..args[2]..".lua doesn't exist.")
+                return
+            end
+        end
+    end
 
-    for k,v in pairs(ignore) do
-        if args[2] == v then
-            kernel.scrMSG(5,"Cannot delete "..args[2]..": defined in ignore")
-        elseif args[2] == "pkg" then
-            print("(insert J. Jonah Jameson laughing hysterically)")
-            error()
-        end
-    end
-        if fs.exists("/bin/"..args[2]..".lua") then
-            fs.delete("/bin/"..args[2]..".lua")
-            kernel.scrMSG(1,"Deleted:"..args[2]..".lua")
-        else
-            kernel.scrMSG(3,"File "..args[2]..".lua doesn't exist.")
-            return
-        end
-    end
+    
 
 if args[1] == "-l" then
     local handle = assert(http.get("https://raw.githubusercontent.com/XDuskAshes/dawn/pkgs/pkg-list"))
@@ -58,7 +73,11 @@ if args[1] == "-l" then
             term.setTextColor(colors.white)
             write(")\n")
         else
-            print(k)
+            write(k.." (")
+            term.setTextColor(colors.red)
+            write("NOT INSTALLED")
+            term.setTextColor(colors.white)
+            write(")\n")
         end
     end
 end

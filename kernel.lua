@@ -46,4 +46,12 @@ function k.scrMSG(type,msg) --type: 1,2,3,4,5 (see docs); msg: message
     end
 end
 
+function k.isColor(a)
+    return a == "white" or a == "orange" or a == "magenta" or a == "lime" or a == "pink" or a == "gray" or a == "cyan" or a == "brown" or a == "blue" or a == "green"
+end
+
+function k.isSide(a)
+    return a == "bottom" or a == "top" or a == "left" or a == "right" or a == "back" or a == "front"
+end
+
 return k

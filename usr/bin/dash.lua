@@ -18,12 +18,34 @@ local handle = fs.open("/etc/usr/.login","r")
 user = handle.readLine()
 handle.close()
 
+local handle2 = fs.open("/stat/.dawninf","r")
+local kernelVer = handle2.readLine()
+handle2.close()
+
 local function isempty(s) --i robbed this from https://stackoverflow.com/questions/19664666/check-if-a-string-isnt-nil-or-empty-in-lua
     return s == nil or s == ''
 end
 
+local function t()
+    local tCurs,yCurs = term.getCursorPos()
+    if yCurs == 1 then
+        yCurs = yCurs + 2
+    end
+    term.clearLine(1,1)
+    term.setCursorPos(1,1)
+    write("DASH 1.0 | "..kernelVer.." | help -i for all help    ")
+    write("===================================================")
+    term.setCursorPos(tCurs,yCurs)
+end
+
+t()
+
 while true do
+    if fs.exists("/etc/config/colorterm") then
+        shell.run("/etc/config/colorterm","r")
+    end
     write(user.."@dash".."-$")
+    term.setTextColor(colors.white)
     local input = read()
     if isempty(input) then
         write("")
@@ -32,4 +54,5 @@ while true do
     else
         shell.run("/bin/"..input)
     end
+    t()
 end
