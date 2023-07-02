@@ -115,6 +115,11 @@ if fs.exists("/etc/config/simpleboot") then --The very simple looking one
             end
     end
 else --the logging one
+
+    local tSizex, tSizey = term.getSize()
+
+    kernel.scrMSG(3,"Term size: ["..tSizex..":"..tSizey.."]")
+
     local basefs = {
         "/bin/",
         "/boot/",
@@ -206,5 +211,4 @@ else --the logging one
                 shell.run("/boot/dbios/init.lua")
             end
     end
-    
 end

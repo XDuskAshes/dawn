@@ -8,7 +8,7 @@ local kernel = require("/kernel")
 
 local args = {...}
 if #args < 1 then
-    print("Usage: pkg (-i, -r)")
+    print("Usage: pkg (-i/-r/-l/--add-src (not fully useful))")
     return
 end
 
@@ -73,6 +73,14 @@ elseif args[1] == "-l" then
             term.setTextColor(colors.white)
             write(")\n")
         end
+    end
+elseif args[1] == "--add-src" then
+    if kernel.empty(args[2]) then
+        print("Usage: pkg --add-src <link>")
+    else
+        local handle3 = fs.open("/stat/pkg/sources-list.txt","a")
+        handle3.writeLine(args[2])
+        handle3.close()
     end
 else
     kernel.scrMSG(5,args[1].." is not valid arg")

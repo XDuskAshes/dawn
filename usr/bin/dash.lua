@@ -27,13 +27,14 @@ local function isempty(s) --i robbed this from https://stackoverflow.com/questio
 end
 
 local function t()
+    local termSize, termS = term.getSize()
     local tCurs,yCurs = term.getCursorPos()
     if yCurs == 1 then
         yCurs = yCurs + 2
     end
     term.clearLine(1,1)
     term.setCursorPos(1,1)
-    write("DASH 1.0 | "..kernelVer.." |  ")
+    write("DASH 1.0 | ["..termSize..":"..termS.."] | 'cat /etc/dash/commlist'      ")
     write("===================================================")
     term.setCursorPos(tCurs,yCurs)
 end

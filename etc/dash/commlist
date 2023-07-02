@@ -1,0 +1,10 @@
+DASH Commands:
+cat <file>
+cls
+help <-i/<topic>>
+label <-s <label>/-c/-d>
+login
+per (unusable atm)
+pkg <-i <pkg>/-r <pkg>/-l>
+usr (-a dont work)
+commlist
