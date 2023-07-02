@@ -12,6 +12,9 @@ local per = peripheral.getNames()
 if k.empty(args[1]) then
     print("Usage: read the docs")
 elseif args[1] == "-m" then
+
+    if not periphemu then k.scrMSG(5,"-m only available in CCPC") end
+
     if k.empty(args[2]) then
         print("No side given")
         error()
