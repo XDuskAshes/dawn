@@ -11,7 +11,8 @@ end
 
 local configs = {
     "simpleboot",
-    "colorterm"
+    "colorterm",
+    "add-debug"
 }
 
 if e(args[1]) then

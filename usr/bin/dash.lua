@@ -35,7 +35,7 @@ local function t()
     term.clearLine(1,1)
     term.setCursorPos(1,1)
     write("DASH 1.0 | ["..termSize..":"..termS.."] | 'cat /etc/dash/commlist'      ")
-    write("===================================================")
+    write(string.rep("=", termSize))
     term.setCursorPos(tCurs,yCurs)
 end
 

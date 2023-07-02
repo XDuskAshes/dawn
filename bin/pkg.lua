@@ -74,7 +74,7 @@ elseif args[1] == "-l" then
             write(")\n")
         end
     end
-elseif args[1] == "--add-src" then
+--[[elseif args[1] == "--add-src" then
     if kernel.empty(args[2]) then
         print("Usage: pkg --add-src <link>")
     else
@@ -84,4 +84,5 @@ elseif args[1] == "--add-src" then
     end
 else
     kernel.scrMSG(5,args[1].." is not valid arg")
+]]
 end
