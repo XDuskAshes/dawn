@@ -27,7 +27,7 @@ elseif args[1] == "-l" then
 elseif args[1] == "-s" then
     if e(args[2]) then
         print("usage (-s): config -s <config>")
-    else
+    elseif args[2] == "colorterm" then
         if e(args[3]) then
             print("Need color input")
         else
@@ -51,6 +51,8 @@ elseif args[1] == "-s" then
                 end
             end
         end
+    else
+        fs.copy("/etc/file","/etc/config/"..args[2])
     end
 elseif args[1] == "-u" then
     if e(args[2]) then

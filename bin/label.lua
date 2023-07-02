@@ -4,8 +4,17 @@
 ]]
 
 local args = {...}
+
+if args[1] == nil or args[1] == "" then
+    print("Usage: label (-s <label>/-c/-d)")
+end
+
 if args[1] == "-s" then
-    os.setComputerLabel(args[2])
+    if args[2] == nil or args[2] == "" then
+        print("Need label")
+    else
+        os.setComputerLabel(args[2])
+    end
 end
 
 if args[1] == "-c" then

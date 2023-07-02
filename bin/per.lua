@@ -22,3 +22,15 @@ if args[1] == "-m" then
         print("Work on this in ccpc")
     end
 end
+
+if args[1] == "-l" then
+    for i,v in ipairs(per) do
+        local t = peripheral.getType(v)
+        print("SIDE | TYPE")
+        print(v,"|",t)
+    end
+end
+
+if args[1] == "disk" then
+    
+end

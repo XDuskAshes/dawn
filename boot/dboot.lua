@@ -11,6 +11,9 @@ if fs.exists("/etc/config/simpleboot") then --The very simple looking one
     print("dboot is running...")
     term.setCursorPos(18,11)
     textutils.slowWrite("[ ---------- ]")
+    term.setCursorPos(20,11)
+    local tSizex, tSizey = term.getSize()
+    write("=")
     local basefs = {
         "/bin/",
         "/boot/",
@@ -33,7 +36,6 @@ if fs.exists("/etc/config/simpleboot") then --The very simple looking one
         "/usr/sbin/",
         "/usr/share/"
     }
-    term.setCursorPos(20,11)
     textutils.slowWrite("=")
 
     local core = {
@@ -88,7 +90,7 @@ if fs.exists("/etc/config/simpleboot") then --The very simple looking one
     end
 
     if fs.exists(bootfile) then
-        textutils.slowWrite("====")
+        textutils.slowWrite("===")
         print("")
         sleep(1)
         shell.run(bootfile)
@@ -97,7 +99,7 @@ if fs.exists("/etc/config/simpleboot") then --The very simple looking one
         textutils.slowWrite("+")
             if fs.exists(bailto) then
                 term.setTextColor(colors.orange)
-                textutils.slowWrite("===")
+                textutils.slowWrite("==")
                 sleep(1)
                 term.setTextColor(colors.white)
                 print("")
