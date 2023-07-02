@@ -24,9 +24,7 @@ if args[1] == "-i" then
             shell.run("wget",v,"/bin/"..k..".lua")
         end
     end
-end
-
-if args[1] == "-r" then
+elseif args[1] == "-r" then
     local handle = assert(http.get("https://raw.githubusercontent.com/XDuskAshes/dawn/pkgs/pkg-ignore"))
     local ignore = textutils.unserialize(handle.readAll())
     handle.close()
@@ -57,11 +55,7 @@ if args[1] == "-r" then
                 return
             end
         end
-    end
-
-    
-
-if args[1] == "-l" then
+elseif args[1] == "-l" then
     local handle = assert(http.get("https://raw.githubusercontent.com/XDuskAshes/dawn/pkgs/pkg-list"))
     local pkg = textutils.unserialize(handle.readAll())
     handle.close()
@@ -80,4 +74,6 @@ if args[1] == "-l" then
             write(")\n")
         end
     end
+else
+    kernel.scrMSG(5,args[1].." is not valid arg")
 end

@@ -11,6 +11,28 @@ local per = peripheral.getNames()
 
 if k.empty(args[1]) then
     print("Usage: read the docs")
+elseif args[1] == "-m" then
+    if k.empty(args[2]) then
+        print("No side given")
+        error()
+    elseif k.empty(args[3]) then
+        print("No type given")
+        error()
+    elseif k.isSide(args[2]) ~= true then
+        k.scrMSG(5,"Not a side:"..args[2])
+    end
+
+    if args[3] == "disk" then
+        if k.empty(args[4]) then
+            k.scrMSG(5,"No mount path given.")
+        else
+            periphemu.create(args[2], args[3], args[4])
+        end
+    else
+        periphemu.create(args[2], args[3])
+    end
+
+
 elseif args[1] == "-l" then
     per = peripheral.getNames()
     for i,v in ipairs(per) do
@@ -20,6 +42,7 @@ elseif args[1] == "-l" then
 elseif args[1] == "disk" then
     if k.empty(args[2]) then
         print("Read docs for usage of",args[1])
+    end
     elseif args[2] == "-l" then
         local drive = peripheral.find("drive") or error("no drives")
         print("| SIDE | MOUNT |")
@@ -89,7 +112,8 @@ elseif args[1] == "disk" then
     else
         print("Supplied argument '"..args[2].."' is not applicable.")
     end
-elseif args[1] == "modem" then
+
+if args[1] == "modem" then
     if k.empty(args[2]) then
         print("Read docs for usage of",args[1])
     elseif args[2] == "-l" then

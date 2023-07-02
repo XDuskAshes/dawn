@@ -33,7 +33,7 @@ local function t()
     end
     term.clearLine(1,1)
     term.setCursorPos(1,1)
-    write("DASH 1.0 | "..kernelVer.." | help -i for all help    ")
+    write("DASH 1.0 | "..kernelVer.." |  ")
     write("===================================================")
     term.setCursorPos(tCurs,yCurs)
 end
