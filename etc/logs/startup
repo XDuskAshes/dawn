@@ -1,5 +1,6 @@
 DAWN CP-BSL Log
 Termsize [51,19]
-ID/Label: test
-Basic info retrieved in: 0.3s
-Reached boot in: 1s
+ID/Label: 0
+Basic info retrieved in: 0.029s
+Check for CCPC configs
+Avoiding bug with keys, suggestion will be passed through with dboot.

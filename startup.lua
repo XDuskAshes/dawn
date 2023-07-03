@@ -89,27 +89,37 @@ if periphemu then
     end
 end
 
-term.setCursorPos(1,10)
-print("           ENTER for boot, Z for dbios")
-
-while true do
-    local event = {os.pullEvent()}
-    local eventD = event[1]
-
-    if eventD == "key" then
-        local k = event[2]
-        if k == 90 then
-            shell.run("/bin/cls.lua")
-            sleep(0.001)
-            handle.writeLine("Booted dbios.")
-            handle.close()
-            shell.run("/boot/dbios/init.lua")
-        elseif k == 257 then
-            sleep(0.001)
-            local c = os.clock()
-            handle.writeLine("Reached boot in: "..c.."s")
-            handle.close()
-            shell.run("/boot/dboot.lua")
+if periphemu then
+    handle.writeLine("Avoiding bug with keys, suggestion will be passed through with dboot.")
+    handle.close()
+    print("Avoiding bug with keys, suggestion will be passed through with dboot.")
+    local handle2 = fs.open("/etc/ccpcBug","w")
+    handle2.write("'dbios' can launch into dbios from login.")
+    handle2.close()
+    sleep(3)
+    shell.run("/boot/dboot.lua")
+else
+    term.setCursorPos(1,10)
+    print("           ENTER for boot, Z for dbios")
+    while true do
+        local event = {os.pullEvent()}
+        local eventD = event[1]
+    
+        if eventD == "key" then
+            local k = event[2]
+            if k == 90 then
+                shell.run("/bin/cls.lua")
+                sleep(0.001)
+                handle.writeLine("Booted dbios.")
+                handle.close()
+                shell.run("/boot/dbios/init.lua")
+            elseif k == 257 then
+                sleep(0.001)
+                local c = os.clock()
+                handle.writeLine("Reached boot in: "..c.."s")
+                handle.close()
+                shell.run("/boot/dboot.lua")
+            end
         end
     end
 end
