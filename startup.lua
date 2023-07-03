@@ -1,7 +1,25 @@
 shell.run("set shell.allow_disk_startup false")
-
+term.clear()
 if fs.exists("/etc/logs/startup") then
     fs.delete("/etc/logs/startup")
+end
+
+local per = peripheral.getNames()
+local yesSpeaker = false
+local s
+for i,v in ipairs(per) do
+    local t = peripheral.getType(v)
+        if t == "speaker" then
+            yesSpeaker = true
+            s = peripheral.find("speaker")
+            s.playNote("bit",3,18)
+            s.playNote("bit",3,23)
+            s.playNote("bit",3,18)
+            sleep(0.3)
+            s.playNote("bit",3,19)
+            s.playNote("bit",3,24)
+            s.playNote("bit",3,19)
+        end
 end
 
 local handle = fs.open("/etc/logs/startup","w")
@@ -20,19 +38,23 @@ end
 
 term.clear()
 term.setCursorPos(1,1)
-print("DAWN CP-BSL") --Computer Post-Boot State Log
+print("DAWN CP-BSL (Computer Post-Boot State Log)") --Computer Post-Boot State Log
 handle.writeLine("Termsize ["..tSizex..","..tSizey.."]")
 print("Termsize ["..tSizex..","..tSizey.."]")
 handle.writeLine("ID/Label: "..ComLab)
 print("ID/Label:",ComLab)
-if term.isColor then
-    handle.writeLine("Color: Yes")
-    print("Color: Yes")
-else
-    handle.writeLine("Color: No")
-    print("Color: No")
-end
-
+print("Color scale:")
+print("==================")
+write("|")
+local col = 1
+local shuffle = 2
+repeat
+    paintutils.drawPixel(shuffle, 6, col)
+    col = col * 2
+    shuffle = shuffle + 1
+until col == 65536
+print("|")
+print("==================")
 local c = os.clock()
 handle.writeLine("Basic info retrieved in: "..c.."s")
 
@@ -67,11 +89,27 @@ if periphemu then
     end
 end
 
-local c = os.clock()
-handle.writeLine("Reached boot in: "..c.."s")
+term.setCursorPos(1,10)
+print("           ENTER for boot, Z for dbios")
 
-handle.close()
+while true do
+    local event = {os.pullEvent()}
+    local eventD = event[1]
 
-sleep(1)
-
-shell.run("/boot/dboot.lua")
+    if eventD == "key" then
+        local k = event[2]
+        if k == 90 then
+            shell.run("/bin/cls.lua")
+            sleep(0.001)
+            handle.writeLine("Booted dbios.")
+            handle.close()
+            shell.run("/boot/dbios/init.lua")
+        elseif k == 257 then
+            sleep(0.001)
+            local c = os.clock()
+            handle.writeLine("Reached boot in: "..c.."s")
+            handle.close()
+            shell.run("/boot/dboot.lua")
+        end
+    end
+end

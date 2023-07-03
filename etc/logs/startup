@@ -1,9 +1,0 @@
-DAWN CP-BSL Log
-Termsize [51,19]
-ID/Label: 0
-Color: Yes
-Basic info retrieved in: 0.059s
-Check for CCPC configs
-Found: /etc/config/add-debug
-attached debugger
-Reached boot in: 0.198s
