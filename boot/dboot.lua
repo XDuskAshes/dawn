@@ -150,8 +150,7 @@ else --the logging one
         "/usr/sbin/",
         "/usr/share/"
     }
-    kernel.scrMSG(1,"init basefs table")
-    
+
     local core = {
         "/kernel.lua",
         "/boot/.bootfile",
@@ -163,15 +162,14 @@ else --the logging one
         --Uncomment the above line if you make an OS based on this
     }
     
-    kernel.scrMSG(1,"init core table")
+    kernel.scrMSG(1,"init basefs & core table")
     
     for _,v in pairs(basefs) do
         if fs.exists(v) ~= true then
             kernel.scrMSG(4,v.." does not exist.")
         end
     end
-    
-    kernel.scrMSG(1,"complete basefs check")
+
     
     for _,v in pairs(core) do
         if fs.exists(v) ~= true then
@@ -179,7 +177,7 @@ else --the logging one
         end
     end
     
-    kernel.scrMSG(1,"complete core check")
+    kernel.scrMSG(1,"complete basefs & core check")
     
     local b = fs.open("/boot/.bootfile","r")
     local bootfile = b.readLine()

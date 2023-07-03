@@ -8,7 +8,7 @@ local function isempty(s) --i robbed this from https://stackoverflow.com/questio
 end
 
 while true do
-    write("@ ")
+    write("+ ")
     local a = read()
     if isempty(a) then
         write("")

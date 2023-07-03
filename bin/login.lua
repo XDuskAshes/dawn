@@ -3,18 +3,18 @@
     By Dusk
 ]]
 
+local kernel = require "/kernel"
+
 local g
 
 if fs.exists("/etc/ccpcBug") then
     local handle = fs.open("/etc/ccpcBug","r")
     g = handle.readAll()
     handle.close()
+    kernel.scrMSG(3,g)
 end
 
-local kernel = require "/kernel"
-
 kernel.scrMSG(1,"Reached: login")
-kernel.scrMSG(3,g)
 fs.delete("/etc/ccpcBug")
 
 local function isempty(s) --i robbed this from https://stackoverflow.com/questions/19664666/check-if-a-string-isnt-nil-or-empty-in-lua
