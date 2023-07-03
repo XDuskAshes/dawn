@@ -8,20 +8,25 @@ local kernel = require "/kernel"
 
 local args = {...}
 if #args < 1 then
-    print("Usage: help (<topic>, -i)")
-    return
+    local t = {}
+    local handle = fs.open("/etc/dash/commlist","r")
+    repeat
+        local a = handle.readLine()
+        table.insert(t,a)
+    until a == nil
+    for i,v in ipairs(t) do
+        textutils.pagedPrint(v)
+    end
+    error()
 end
 
-if args[1] == "-i" then
-    local i = fs.list("/etc/dash/help/")
-    for k,v in pairs(i) do
-        print(v)
-    end
-elseif args[1] == "-l" then
+if args[1] == "-l" then
     local i = fs.list("/bin/")
         for k,v in pairs(i) do
             print(v)
         end
+elseif kernel.empty(args[1]) then
+    print("No empty args[1]")
 else
     local a = fs.open("/etc/dash/help/"..args[1],"r")
     if a == nil then

@@ -12,7 +12,8 @@ end
 local configs = {
     "simpleboot",
     "colorterm",
-    "add-debug"
+    "add-debug",
+    "dash_simplecursor"
 }
 
 if e(args[1]) then

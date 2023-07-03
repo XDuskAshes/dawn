@@ -45,7 +45,12 @@ while true do
     if fs.exists("/etc/config/colorterm") then
         shell.run("/etc/config/colorterm","r")
     end
-    write(user.."@dash".."-$")
+
+    if fs.exists("/etc/config/dash_simplecursor") then
+        write(user.."-$ ")
+    else
+        write(user.."@dash".."-$ ")
+    end
     term.setTextColor(colors.white)
     local input = read()
     if isempty(input) then

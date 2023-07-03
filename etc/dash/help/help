@@ -1,0 +1,6 @@
+help - help utility
+Usage(s):
+
+help - displays content of /etc/dash/commlist
+help -l - displays content of /bin/
+help <topic> - displays help on a topic
