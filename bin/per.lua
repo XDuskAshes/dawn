@@ -24,10 +24,14 @@ if args[1] == "-m" then
 end
 
 if args[1] == "-l" then
+    print("| SIDE | TYPE |")
     for i,v in ipairs(per) do
         local t = peripheral.getType(v)
-        print("SIDE | TYPE")
-        print(v,"|",t)
+        if v == "bottom" then v = "bott" end
+        if v == "front" then v = "fron" end
+        if t == "speaker" then t = "spea" end
+        if t == "drive" then t = "driv" end
+        print("|",v,"|",t,"|")
     end
 end
 

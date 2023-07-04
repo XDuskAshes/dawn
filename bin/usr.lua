@@ -12,7 +12,7 @@ end
 local args = {...}
 
 if args[1] == "-a" then
-    local toWrite = ""
+    
 elseif args[1] == "-r" then
     if args[2] == "root" then
         k.scrMSG(5,"root cannot be removed.")
