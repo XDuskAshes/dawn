@@ -23,7 +23,7 @@ for i,v in ipairs(per) do
 end
 
 local handle = fs.open("/etc/logs/startup","w")
-handle.writeLine("DAWN CP-BSL Log")
+handle.writeLine("DAWN CP-BSL (Computer Post-Boot State Log)")
 
 local tSizex, tSizey = term.getSize()
 local id = os.getComputerID()
@@ -90,13 +90,13 @@ if periphemu then
 end
 
 if periphemu then
-    handle.writeLine("Avoiding bug with keys, suggestion will be passed through with dboot.")
-    handle.close()
+    handle.writeLine("Avoiding bug with keys, suggestion will be passed through with dboot.")   
     print("Avoiding bug with keys, suggestion will be passed through with dboot.")
-    local handle2 = fs.open("/etc/ccpcBug","w")
-    handle2.write("'dbios' can launch into dbios from login.")
-    handle2.close()
-    sleep(3)
+    local c = os.clock()
+    handle.writeLine("Reached boot in: "..c.."s")
+    handle.close()
+    fs.copy("/etc/file","/etc/ccpcBug")
+    sleep(1)
     shell.run("/boot/dboot.lua")
 else
     term.setCursorPos(1,10)
@@ -111,6 +111,8 @@ else
                 shell.run("/bin/cls.lua")
                 sleep(0.001)
                 handle.writeLine("Booted dbios.")
+                local c = os.clock()
+                handle.writeLine("Reached boot to dbios in: "..c.."s")
                 handle.close()
                 shell.run("/boot/dbios/init.lua")
             elseif k == 257 then

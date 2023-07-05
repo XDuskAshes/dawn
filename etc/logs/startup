@@ -1,5 +1,7 @@
-DAWN CP-BSL Log
+DAWN CP-BSL (Computer Post-Boot State Log)
 Termsize [51,19]
-ID/Label: test
-Basic info retrieved in: 0.35s
-Reached boot in: 2.2s
+ID/Label: 0
+Basic info retrieved in: 0.027s
+Check for CCPC configs
+Avoiding bug with keys, suggestion will be passed through with dboot.
+Reached boot in: 0.028s
