@@ -1,5 +1,3 @@
 /etc/logs/*
 /etc/usr/*
 /etc/config/*
-/etc/passwd
-/etc/sudoers
