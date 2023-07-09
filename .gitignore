@@ -1,5 +1,7 @@
-/etc/logs/*
-/etc/usr/*
-/etc/config/*
-/etc/passwd
-/etc/sudoers
+etc/logs/
+etc/usr/
+etc/config/
+etc/passwd
+etc/sudoers
+tmp/
+stat/pkg/sources-list.txt
