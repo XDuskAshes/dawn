@@ -6,4 +6,5 @@ label <-s <label>/-c/-d>
 login
 per (unusable atm)
 pkg <-i <pkg>/-r <pkg>/-l>
-usr (-a dont work)
+usr
+phone <file,line>
