@@ -95,6 +95,9 @@ if periphemu then
     local c = os.clock()
     handle.writeLine("Reached boot in: "..c.."s")
     handle.close()
+    if fs.exists("/etc/ccpcBug") then
+        fs.delete("/etc/ccpcBug")
+    end
     fs.copy("/etc/file","/etc/ccpcBug")
     sleep(1)
     shell.run("/boot/dboot.lua")

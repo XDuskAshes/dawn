@@ -54,6 +54,9 @@ elseif args[1] == "-s" then
         end
     else
         fs.copy("/etc/file","/etc/config/"..args[2])
+        local handle = fs.open("/etc/config/"..args[2],"w")
+        handle.write("This file was made by dbios config ("..args[2]..")")
+        handle.close()
     end
 elseif args[1] == "-u" then
     if e(args[2]) then

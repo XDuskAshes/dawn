@@ -18,7 +18,7 @@ function k.empty(s) --see line 11
     return s == nil or s == ""
 end
 
-function k.scrMSG(type,msg,err) --type: 1,2,3,4,5 (see docs); msg: message
+function k.scrMSG(type,msg,err) --type: 1,2,3,4,5 (see docs); msg: message; err: error code
     local name = fs.getName(shell.getRunningProgram())
     if isempty(err) then
         if type == 1 then
@@ -46,30 +46,59 @@ function k.scrMSG(type,msg,err) --type: 1,2,3,4,5 (see docs); msg: message
             error()
         end
     else
-        if type == 1 then
-            write("("..name.."):[")
-            term.setTextColor(colors.green)
-            write("OK")
-            term.setTextColor(colors.white)
-            write("]:"..msg.."("..err..")\n")
-        elseif type == 2 then
-            write("("..name.."):[")
-            term.setTextColor(colors.yellow)
-            write("WARN")
-            term.setTextColor(colors.white)
-            write("]:"..msg.."("..err..")\n")
-        elseif type == 3 then
-            write("("..name.."):[")
-            term.setTextColor(colors.brown)
-            write("INFO")
-            term.setTextColor(colors.white)
-            write("]:"..msg.."("..err..")\n")
-        elseif type == 4 then
-            printError("("..name.."):[ ERROR ]:"..msg.."("..err..")\n")
-        elseif type == 5 then
-            printError("("..name.."):[ ERROR ]:"..msg.."("..err..")\n")
-            error()
-        end 
+        local errNum = tonumber(err)
+        if errNum then
+            if type == 1 then
+                write("("..name.."):[")
+                term.setTextColor(colors.green)
+                write("OK")
+                term.setTextColor(colors.white)
+                write("]:"..msg.."("..err..")\n")
+            elseif type == 2 then
+                write("("..name.."):[")
+                term.setTextColor(colors.yellow)
+                write("WARN")
+                term.setTextColor(colors.white)
+                write("]:"..msg.."("..err..")\n")
+            elseif type == 3 then
+                write("("..name.."):[")
+                term.setTextColor(colors.brown)
+                write("INFO")
+                term.setTextColor(colors.white)
+                write("]:"..msg.."("..err..")\n")
+            elseif type == 4 then
+                printError("("..name.."):[ ERROR ]:"..msg.."(code:"..err..")")
+            elseif type == 5 then
+                printError("("..name.."):[ ERROR ]:"..msg.."(code:"..err..")")
+                error()
+            end
+        else
+            if type == 1 then
+                write("("..name.."):[")
+                term.setTextColor(colors.green)
+                write("OK")
+                term.setTextColor(colors.white)
+                write("]:"..msg.."\n")
+            elseif type == 2 then
+                write("("..name.."):[")
+                term.setTextColor(colors.yellow)
+                write("WARN")
+                term.setTextColor(colors.white)
+                write("]:"..msg.."\n")
+            elseif type == 3 then
+                write("("..name.."):[")
+                term.setTextColor(colors.brown)
+                write("INFO")
+                term.setTextColor(colors.white)
+                write("]:"..msg.."\n")
+            elseif type == 4 then
+                printError("("..name.."):[ ERROR ]:"..msg)
+            elseif type == 5 then
+                printError("("..name.."):[ ERROR ]:"..msg)
+                error()
+            end
+        end
+        
     end
 end
 
