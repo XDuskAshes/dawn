@@ -20,6 +20,8 @@ ignore:
   "label",
   "usr",
   "per",
-  "login"
+  "login",
+  "phone",
+  "cat"
 }
 ``
