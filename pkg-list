@@ -1,4 +1,4 @@
 {
-    [ "fetch" ] = "https://raw.githubusercontent.com/XDuskAshes/dawn/pkgs/dash/fetch.lua",
-    [ "ldisk" ] = "https://raw.githubusercontent.com/XDuskAshes/dawn/pkgs/dash/ldisk.lua" 
+    [ "fetch" ] = "https://raw.githubusercontent.com/XDuskAshes/dawn/pkgs/dash/fetch/fetch.txt",
+    [ "ldisk" ] = "https://raw.githubusercontent.com/XDuskAshes/dawn/pkgs/dash/ldisk/ldisk.txt" 
 }

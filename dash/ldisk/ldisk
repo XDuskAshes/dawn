@@ -1,0 +1,6 @@
+{
+    "ldisk",
+    "1.0.0",
+    "per disk -l -v, but one disk at a time. Also saves to a file.",
+    "https://raw.githubusercontent.com/XDuskAshes/dawn/pkgs/dash/ldisk/src/ldisk.lua"
+}
