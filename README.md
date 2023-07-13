@@ -32,14 +32,9 @@ Note on package format:
 
 ```
 {
-
   "name",
-
   "version",
-
   "description",
-  
   "link to program"
-
 }
 ```
