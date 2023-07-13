@@ -30,7 +30,7 @@ ignore:
 
 Note on package format:
 
-``
+```
 {
 
   "name",
@@ -42,4 +42,4 @@ Note on package format:
   "link to program"
 
 }
-``
+```
