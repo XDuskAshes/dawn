@@ -2,5 +2,5 @@
     "fetch",
     "1.0.0",
     "screenfetch, but it's less clunky",
-    "https://raw.githubusercontent.com/XDuskAshes/dawn/pkgs/dash/ldisk/src/fetch.lua"
+    "https://raw.githubusercontent.com/XDuskAshes/dawn/pkgs/dash/fetch/src/fetch.lua"
 }
