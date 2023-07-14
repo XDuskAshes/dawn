@@ -170,6 +170,7 @@ else --the logging one
     
     for _,v in pairs(basefs) do
         if fs.exists(v) ~= true then
+            fs.makeDir(v)
             kernel.scrMSG(4,v.." does not exist.")
         end
     end
