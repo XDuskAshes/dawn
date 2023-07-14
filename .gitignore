@@ -3,5 +3,6 @@ etc/usr/
 etc/config/
 etc/passwd
 etc/sudoers
+etc/ccpcBug
 tmp/
 stat/pkg/sources-list.txt
